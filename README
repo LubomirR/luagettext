@@ -1,0 +1,5 @@
+lua-gettext
+
+gettext (libintl) bindings for Lua 5.1.
+
+See LICENSE for information about licensing.
