@@ -68,7 +68,7 @@ static void set_domain_name(lua_State * L, const char * domain)
     lua_rawset(L, LUA_REGISTRYINDEX);
 }
 
-static const char * get_domain_name(lua_State * L)
+static char * get_domain_name(lua_State * L)
 {
     lua_pushliteral(L, DOMAIN_REGISTRY_NAME);
     lua_rawget(L, LUA_REGISTRYINDEX);
@@ -103,7 +103,7 @@ static int lua_textdomain(lua_State * L)
             return 0;
         }
     } else {
-        const char * domain = get_domain_name(L);
+        char * domain = get_domain_name(L);
         lua_pushstring(L, domain);
         free(domain);
         return 1;
@@ -136,7 +136,7 @@ static int lua_gettext(lua_State * L)
     const char * msgid = NULL;
 
     if ((msgid = luaL_checkstring(L, -1)) != NULL) {
-        const char * domain = get_domain_name(L);
+        char * domain = get_domain_name(L);
         lua_pushstring(L, dgettext(domain, msgid));
         free(domain);
         return 1;
@@ -179,7 +179,7 @@ static int lua_ngettext(lua_State * L)
     int n = luaL_checkint(L, -1);
 
     if (msgid != NULL && msgid_plural != NULL) {
-        const char * domain = get_domain_name(L);
+        char * domain = get_domain_name(L);
         lua_pushstring(L, dngettext(domain, msgid, msgid_plural, n));
         free(domain);
         return 1;
